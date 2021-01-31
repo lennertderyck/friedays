@@ -10,18 +10,32 @@
                         <option v-for="nerd in this.$root.nerds" :key="nerd.id" :value="nerd.id">{{ nerd.firstName }} {{ nerd.lastName }}</option>
                     </select>
                 </div>
-                <div class="mt-3">
+                <div class="mt-4">
                     <div class="form-label">Voeg extra personen toe aan deze bestelling</div>
                     <div v-if="!selectedPerson">
                         <span class="text-muted">Selecteer eerst wie deze bestelling plaatst</span>
                     </div>
                     <div class="list-group" v-else>
-                        <template v-for="nerd in this.$root.nerds">
+                        <div class="list-group-item p-0 d-flex align-items-center justify-content-between position-relative">
+                            <input type="text" name="restaurant" class="form-control list-group-item w-100 border-0" placeholder="Zoek een persoon" autocomplete="off" @keyup="filterUsersChange($event)">
+                        </div>
+                        <template v-for="nerd in filteredExtraUsers.slice(0, 4)">
                             <label class="list-group-item" v-if="selectedPerson !== nerd.id" :key="nerd.id">
-                                <input class="form-check-input me-1" name="usersExtra" type="checkbox" :value="nerd.id">
+                                <input class="form-check-input me-1" name="usersExtra" type="checkbox" :value="nerd.id" @change="setExtraUser($event, nerd)">
                                 {{ nerd.firstName }} {{ nerd.lastName }}
                             </label>
                         </template>
+                    </div>
+                    <div class="mt-3" v-if="currentExtraUsers.length !== 0">
+                        <div class="form-label text-muted">Extra personen voor deze bestelling</div>
+                        <div class="list-group">
+                            <template v-for="nerd in currentExtraUsers">
+                                <label class="list-group-item" v-if="selectedPerson !== nerd.id" :key="nerd.id">
+                                    <input class="form-check-input me-1" name="usersExtra" type="checkbox" checked :value="nerd.id" @change="setExtraUser($event, nerd)">
+                                    {{ nerd.firstName }} {{ nerd.lastName }}
+                                </label>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,7 +56,7 @@
                 </ul>
             </div>
             <div class="px-3 px-md-4 px-lg-5">
-                <div class="mt-3">
+                <div class="mt-4">
                     <div class="form-label d-flex align-items-center">
                         Restaurant 
                         <div class="ms-1" tabindex="0" data-bs-toggle="popover" data-bs-content="Data afkomstig van Stad Gent">
@@ -78,13 +92,13 @@
                         <strong v-else>{{ reOrderData.otherShop }}</strong>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-4">
                     <label class="w-100">
                         <div class="form-label">Je bestelling</div>
                         <input type="text" name="order" class="form-control w-100" autocomplete="off" :value="reOrderData && reOrderData.order" :placeholder="this.latestOrder.id ? `bv. ${this.latestOrder.order}` : 'Wat wil je bestellen'">
                     </label>
                 </div>
-                <div class="mt-3">
+                <div class="mt-4">
                     <label class="w-100">
                         <div class="form-label">Opmerkingen / wensen</div>
                         <textarea class="form-control" rows="3" name="comment" :value="reOrderData && reOrderData.comment" :placeholder="this.latestOrder.id && `bv. ${this.latestOrder.comment}`"></textarea>
@@ -120,7 +134,7 @@
 </style>
 
 <script>
-    import { filterShops, getShops, showLatestOrders, placeOrder } from '../utils'
+    import { filterShops, getShops, showLatestOrders, placeOrder, filterPersons } from '../utils'
     import dayjs from 'dayjs';
     import { getFormData } from 'cutleryjs';
     
@@ -134,8 +148,10 @@
             selectedPerson: null,
             latestOrder: {},
             currentOrder: null,
+            currentExtraUsers: [],
             shops: [],
             filteredShops: null,
+            filteredExtraUsers: [],
             reOrderData: null
         }),
         async mounted() {
@@ -148,9 +164,23 @@
                 this.latestOrder = { ...this.latestOrders[0] }
             },
             dayjs,
+            filterUsersChange ({ target: { value: query = null }}) {
+                if (query === '') this.filteredExtraUsers = [];
+                else this.filteredExtraUsers = filterPersons(this.$root.nerds, query);
+            },
             filterShopsChange ({ target: { value: query = null }}) {
                 if (query === '') this.filteredShops = null;
                 else this.filteredShops = filterShops(this.shops, query)
+            },
+            setExtraUser ({ target: { value: userID, checked }}, userData) {
+                console.log(userData);
+                if (checked) {
+                    this.filteredExtraUsers = this.filteredExtraUsers.filter(({ id }) => id !== userID);
+                    this.currentExtraUsers.push(userData)
+                } else {
+                    this.filteredExtraUsers.push(userData);
+                    this.currentExtraUsers = this.currentExtraUsers.filter(({ id }) => id !== userID);
+                }
             },
             selectPreviousOrder (event, orderID) {
                 const $btn = event.target.closest('button');
