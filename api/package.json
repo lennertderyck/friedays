@@ -9,7 +9,6 @@
     "email" : "hello@lennertderyck.be?subject=Frieday api bug"
   },
   "scripts": {
-    "dev": "vercel dev"
   },
   "dependencies": {
     "airtable": "^0.10.1",
