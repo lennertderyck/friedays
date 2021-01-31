@@ -134,7 +134,7 @@
 </style>
 
 <script>
-    import { filterShops, getShops, showLatestOrders, placeOrder, filterPersons } from '../utils'
+    import { filterShops, getShops, showLatestOrders, placeOrder, filterPersons, checkExtraUser, unCheckExtraUser } from '../utils'
     import dayjs from 'dayjs';
     import { getFormData } from 'cutleryjs';
     
@@ -173,11 +173,12 @@
                 else this.filteredShops = filterShops(this.shops, query)
             },
             setExtraUser ({ target: { value: userID, checked }}, userData) {
-                console.log(userData);
                 if (checked) {
                     this.filteredExtraUsers = this.filteredExtraUsers.filter(({ id }) => id !== userID);
+                    this.$root.nerds = this.$root.nerds.filter(({ id }) => id !== userID);
                     this.currentExtraUsers.push(userData)
                 } else {
+                    this.$root.nerds.push(userData);
                     this.filteredExtraUsers.push(userData);
                     this.currentExtraUsers = this.currentExtraUsers.filter(({ id }) => id !== userID);
                 }
