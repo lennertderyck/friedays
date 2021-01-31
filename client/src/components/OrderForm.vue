@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <form class="shadow-sm rounded py-5" @submit="handleSubmit($event)">
-            <div class="px-5">
+        <form class="shadow-sm rounded py-3 py-md-4 py-lg-5" @submit="handleSubmit($event)">
+            <div class="px-3 px-md-4 px-lg-5">
                 <h3 class="mb-4">Nieuwe bestelling</h3>
                 <div>
                     <div class="form-label">Voor wie is deze bestelling</div>
@@ -25,24 +25,23 @@
                     </div>
                 </div>
             </div>
-            <div v-if="latestOrders && latestOrders.length != 0" class="mt-4 bg-light px-5 py-4">
+            <div v-if="latestOrders && latestOrders.length != 0" class="mt-4 bg-light px-3 px-md-4 px-lg-5 py-4">
                 <h5 class="mb-3">Recentste bestellingen</h5>
                 <ul class="list-group">
-                    <button type="button" v-for="order in latestOrders" :key="order.id" @click="selectPreviousOrder($event, order)" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
-                        <!-- <span class="badge rounded-pill bg-light text-dark">{{ order.time }}</span> -->
-                        <p class="mb-0 d-flex align-items-center">
+                    <button type="button" v-for="order in latestOrders.slice(0, 3)" :key="order.id" @click="selectPreviousOrder($event, order)" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                        <p class="mb-0 d-flex flex-column flex-lg-row align-items-lg-center">
                             <span>{{ order.order }}</span>
-                            <span>・</span>
+                            <span class="d-none d-lg-inline">・</span>
                             <span class="opacity-75">besteld op {{ dayjs(order.time).format('DD MMMM') }} bij {{ order.shop ? order.shop.fields.naam : order.otherShop }}</span>
                         </p>
                         <div class="d-flex align-items-center">
-                            opnieuw bestellen
+                            <span class="d-none d-lg-inline">opnieuw bestellen</span>
                             <box-icon name='redo' class="ms-1"></box-icon>
                         </div>
                     </button>
                 </ul>
             </div>
-            <div class="px-5">
+            <div class="px-3 px-md-4 px-lg-5">
                 <div class="mt-3">
                     <div class="form-label d-flex align-items-center">
                         Restaurant 
