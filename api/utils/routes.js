@@ -3,7 +3,7 @@ import { getOrders, getOrdersByDate, getOrdersByID, getUserByID, getUsers, getOr
 import projectData from '../package.json';
 import { getShops, getShopByID } from './getShops';
 
-api.get('/info', async (req, res) => {
+api.get('/', async (req, res) => {
     res.json({
         version: projectData.version,
         author: projectData.author,
