@@ -14,9 +14,11 @@ const corsOpts = {
     ],
 
     allowedHeaders: [
-        'Content-Type',
+        'Content-Type'
     ],
     
+    
+    accessControlAllowOrigin: '*'
 };
 
 // set handlers
@@ -27,7 +29,8 @@ api.use(express.urlencoded({
     extended: true
 }));
 api.use((err, req, res, next) => {
-  res.status(500).json(err)
+    res.header("Access-Control-Allow-Origin", "*")
+    res.status(500).json(err)
 })
 
 export default api;

@@ -1,3 +1,3 @@
 export const variables = {
-    apiBase: 'https://frieday-api.vercel.app'
+    apiBase: 'http://localhost:3000'
 }
