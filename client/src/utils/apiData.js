@@ -27,7 +27,7 @@ export const placeOrder = async orderData => {
         },
     })
     const data = resp.json();
-    console.log('posted data', data);
+    return data;
 }
 
 export const getShops = async () => {

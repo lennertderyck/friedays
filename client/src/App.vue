@@ -19,6 +19,10 @@
         vertical-align: middle;
     }
     
+    .btn {
+        width: fit-content;
+    }
+    
     .opacity-50 {opacity: .5;}
     .opacity-75 {opacity: .75;}
     
