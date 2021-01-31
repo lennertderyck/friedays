@@ -9,10 +9,22 @@ export const getNerds = async () => {
 export const showLatestOrders = async userID => {
     const resp = await fetch(variables.apiBase + '/orders/nerds/' + userID);
     const data = await resp.json();
-    return await Promise.all(data.map(async ({ shop, ...otherFields }) => ({
-        shop: await getShopByID(shop),
-        ...otherFields
-    })));
+    return await Promise.all(data.map(async ({ shop, otherShop = null, ...otherFields }) => {
+        return {
+            shop: !otherShop ? await getShopByID(shop): null,
+            otherShop,
+            ...otherFields
+        }
+    }));
+}
+
+export const placeOrder = async orderData => {
+    const resp = await fetch(variables.apiBase + '/orders/new/', {
+        method: 'POST',
+        body: JSON.stringify(orderData)
+    })
+    const data = resp.json();
+    console.log('posted data', data);
 }
 
 export const getShops = async () => {

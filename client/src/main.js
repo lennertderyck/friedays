@@ -6,7 +6,6 @@ import 'boxicons'
 import '@popperjs/core';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap';
-console.log(bootstrap)
 import { variables } from '../site.config'
 import { getNerds } from './utils/apiData'
 

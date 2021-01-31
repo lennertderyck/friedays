@@ -12,7 +12,6 @@
     "bootstrap": "^5.0.0-beta1",
     "boxicons": "^2.0.7",
     "core-js": "^3.6.5",
-    "cutleryjs": "^3.5.5",
     "dayjs": "^1.10.4",
     "vue": "^2.6.11"
   },
@@ -21,6 +20,7 @@
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
+    "cutleryjs": "^3.6.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.32.5",

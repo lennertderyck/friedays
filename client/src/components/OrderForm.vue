@@ -1,11 +1,11 @@
 <template>
     <div class="container">
-        <div class="shadow-sm rounded py-5">
+        <form class="shadow-sm rounded py-5" @submit="handleSubmit($event)">
             <div class="px-5">
                 <h3 class="mb-4">Nieuwe bestelling</h3>
                 <div>
                     <div class="form-label">Voor wie is deze bestelling</div>
-                    <select class="form-select" aria-label="Default select example" @change="onChange($event)" required>
+                    <select class="form-select" name="user" @change="onChange($event)" required>
                         <option selected disabled>Selecteer een persoon</option>
                         <option v-for="nerd in this.$root.nerds" :key="nerd.id" :value="nerd.id">{{ nerd.firstName }} {{ nerd.lastName }}</option>
                     </select>
@@ -28,12 +28,12 @@
             <div v-if="latestOrders && latestOrders.length != 0" class="mt-4 bg-light px-5 py-4">
                 <h5 class="mb-3">Recentste bestellingen</h5>
                 <ul class="list-group">
-                    <button v-for="order in latestOrders" :key="order.id" @click="selectPreviousOrder($event)" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                    <button type="button" v-for="order in latestOrders" :key="order.id" @click="selectPreviousOrder($event, order)" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
                         <!-- <span class="badge rounded-pill bg-light text-dark">{{ order.time }}</span> -->
                         <p class="mb-0 d-flex align-items-center">
                             <span>{{ order.order }}</span>
                             <span>・</span>
-                            <span class="opacity-75">besteld op {{ dayjs(order.time).format('DD MMMM') }} bij {{ order.shop.fields.naam }}</span>
+                            <span class="opacity-75">besteld op {{ dayjs(order.time).format('DD MMMM') }} bij {{ order.shop ? order.shop.fields.naam : order.otherShop }}</span>
                         </p>
                         <div class="d-flex align-items-center">
                             opnieuw bestellen
@@ -50,20 +50,20 @@
                             <box-icon name='info-circle' ></box-icon>
                         </div>
                     </div>
-                    <div class="list-group">
+                    <div class="list-group" v-if="!reOrderData">
                         <div class="list-group-item p-0 d-flex align-items-center justify-content-between position-relative">
-                            <input type="text" name="order" class="form-control list-group-item w-100 border-0" placeholder="Waar wil je bestellen" autocomplete="off" @keyup="filterShopsChange($event)">
+                            <input type="text" name="restaurant" class="form-control list-group-item w-100 border-0" placeholder="Waar wil je bestellen" autocomplete="off" @keyup="filterShopsChange($event)">
                             <label class="form-check mb-0 ms-3 position-absolute end-0 pe-3" style="z-index: 1" v-if="filteredShops && filteredShops.length == 0">
                                 <span class="form-check-label text-nowrap">
                                     Hier toch bestellen
                                 </span>
-                                <input class="form-check-input" type="checkbox" value="restaurantOverride" checked>
+                                <input class="form-check-input" type="checkbox" name="restaurantOverride" checked>
                             </label>
                         </div>
                         <template v-if="filteredShops && filteredShops.length != 0">
                             <template v-for="shop in filteredShops.slice(0, 5)">
                                 <label class="list-group-item" :key="shop.recordid">
-                                    <input class="form-check-input me-1" name="usersExtra" type="radio" :value="shop.recordid">
+                                    <input class="form-check-input me-1" name="shop" type="radio" :value="shop.recordid">
                                     {{ shop.fields.naam }}
                                 </label>
                             </template>
@@ -71,26 +71,32 @@
                         <template v-else-if="filteredShops && filteredShops.length == 0">
                             <div class="list-group-item d-flex align-items-center">
                                 <p class="mb-0 text-muted">Geen restaurants gevonden met deze naam</p>
-                                
                             </div>
                         </template>
+                    </div>
+                    <div v-else>
+                        <strong v-if="reOrderData.shop">{{ reOrderData.shop.fields.naam }}</strong>
+                        <strong v-else>{{ reOrderData.otherShop }}</strong>
                     </div>
                 </div>
                 <div class="mt-3">
                     <label class="w-100">
                         <div class="form-label">Je bestelling</div>
-                        <input type="text" name="order" class="form-control w-100" autocomplete="off" :placeholder="this.latestOrder.id ? `bv. ${this.latestOrder.order}` : 'Wat wil je bestellen'">
+                        <input type="text" name="order" class="form-control w-100" autocomplete="off" :value="reOrderData && reOrderData.order" :placeholder="this.latestOrder.id ? `bv. ${this.latestOrder.order}` : 'Wat wil je bestellen'">
                     </label>
                 </div>
                 <div class="mt-3">
                     <label class="w-100">
                         <div class="form-label">Opmerkingen / wensen</div>
-                        <textarea class="form-control" rows="3" :placeholder="this.latestOrder.id && `bv. ${this.latestOrder.comment}`"></textarea>
+                        <textarea class="form-control" rows="3" name="comment" :value="reOrderData && reOrderData.comment" :placeholder="this.latestOrder.id && `bv. ${this.latestOrder.comment}`"></textarea>
                     </label>
                 </div>
-                <input type="hidden" name="reOrder" value="recMJnlY7LxYLtPIg">
             </div>
-        </div>
+            <input type="hidden" name="reOrder" :value="reOrderData.id" v-if="reOrderData">
+            <div class="px-5">
+                <button type="submit" class="btn btn-primary mt-3 d-block">Bestellen</button>
+            </div>
+        </form>
     </div>
 </template>
 
@@ -115,8 +121,9 @@
 </style>
 
 <script>
-    import { filterShops, getShops, showLatestOrders } from '../utils'
+    import { filterShops, getShops, showLatestOrders, placeOrder } from '../utils'
     import dayjs from 'dayjs';
+    import { getFormData } from 'cutleryjs';
     
     export default {
         name: 'OrderForm',
@@ -129,7 +136,8 @@
             latestOrder: {},
             currentOrder: null,
             shops: [],
-            filteredShops: null
+            filteredShops: null,
+            reOrderData: null
         }),
         async mounted() {
             this.shops = await getShops();
@@ -142,17 +150,39 @@
             },
             dayjs,
             filterShopsChange ({ target: { value: query = null }}) {
-                this.filteredShops = filterShops(this.shops, query)
+                if (query === '') this.filteredShops = null;
+                else this.filteredShops = filterShops(this.shops, query)
             },
-            selectPreviousOrder (event) {
+            selectPreviousOrder (event, orderID) {
                 const $btn = event.target.closest('button');
                 const $currentActive = $btn.parentNode.querySelector('.active');
                 
-                if ($btn.classList.contains('active')) $btn.classList.remove('active');
-                else {
+                if ($btn.classList.contains('active')) {
+                    $btn.classList.remove('active')
+                    this.reOrderData = null;
+                } else {
                     $currentActive && $currentActive.classList.remove('active');
                     $btn.classList.add('active');
+                    this.reOrderData = orderID;
                 }
+            },
+            handleSubmit (event) {
+                event.preventDefault();
+                const formData = getFormData(event.target);
+                
+                const { 
+                    user, usersExtra, restaurant, restaurantOverride, reOrder, 
+                    shop = this.reOrderData && this.reOrderData.shop && this.reOrderData.shop.recordid,
+                    ...otherValues 
+                } = Object.fromEntries(formData)
+                
+                const result = {
+                    users: [formData.get('user'), ...formData.get('usersExtra')],
+                    shop,
+                    otherShop: restaurantOverride && restaurant || this.reOrderData && !this.reOrderData.shop && this.reOrderData.otherShop || undefined,
+                    ...otherValues
+                }
+                placeOrder(result);
             }
         }
     }
