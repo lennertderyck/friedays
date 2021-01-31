@@ -45,7 +45,7 @@ Array.prototype.getFields = function () {
         const [ idFromArray ] = id;
         return { 
             id: idFromArray !== 'r' ? idFromArray : id,
-            ...fields ,
+            ...fields,
         }
     })
 }
