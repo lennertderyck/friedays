@@ -34,7 +34,9 @@ export const getOrdersByDate = async (date = 'today', dateEnd = null) => {
     ).getFields();
 }
 
-export const getOrdersFromUser = async (userID) => (await base('orders').select().all())
+export const getOrdersFromUser = async (userID) => (await base('orders').select({
+    sort: [{field: "time", direction: "desc"}]
+}).all())
     .getFields()
     .filter(({ users }) => users.includes(userID))
 
