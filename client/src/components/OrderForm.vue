@@ -47,7 +47,7 @@
                             <p class="mb-0 d-flex flex-column flex-lg-row align-items-lg-center">
                                 <span>{{ order.order }}</span>
                                 <span class="d-none d-lg-inline">・</span>
-                                <span class="opacity-75">besteld op {{ dayjs(order.time).format('DD MMMM') }} bij {{ order.shop ? order.shop.fields.naam : order.otherShop }}</span>
+                                <span class="opacity-75">besteld op {{ dayjs(order.time).format('D MMMM') }} bij {{ order.shop ? order.shop.fields.naam : order.otherShop }}</span>
                             </p>
                             <div class="d-flex align-items-center">
                                 <span class="d-none d-lg-inline">opnieuw bestellen</span>
