@@ -140,6 +140,7 @@
 </style>
 
 <script>
+ /* eslint-disable */
     import { filterShops, getShops, showLatestOrders, placeOrder, filterPersons, checkExtraUser, unCheckExtraUser } from '../utils'
     import dayjs from 'dayjs';
     import { getFormData } from 'cutleryjs';

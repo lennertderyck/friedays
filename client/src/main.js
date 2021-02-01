@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap';
 import { variables } from '../site.config'
 import { getNerds } from './utils/apiData'
+import './registerServiceWorker'
 
 dayjs.locale('nl-be');
 Vue.config.productionTip = false
