@@ -14,14 +14,14 @@ export const filterPersons = (persons = [], query = null) => {
     })
 }
 
-// export const checkExtraUser = (datasets, userID, userData) => {
-//     datasets.forEach(set => {
-//         set = set.filter(({ id }) => id !== userID)
-//     })
-// }
+export const checkExtraUser = (datasets, userID, userData) => {
+    datasets.forEach(set => {
+        set = set.filter(({ id }) => id !== userID)
+    })
+}
 
-// export const unCheckExtraUser = (datasets, userID, userData) => {
-//     datasets.forEach(set => {
-//         set.push(userData)
-//     })
-// }
+export const unCheckExtraUser = (datasets, userID, userData) => {
+    datasets.forEach(set => {
+        set.push(userData)
+    })
+}
