@@ -38,6 +38,9 @@
         name: 'App',
         components: {
             OrderForm
+        },
+        mounted() {
+            document.title = 'Friedays'
         }
     }
 </script>

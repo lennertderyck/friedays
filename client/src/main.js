@@ -17,7 +17,7 @@ new Vue({
     render: h => h(App),
     data () {
         return {
-            title: 'Frieday.app',
+            title: 'Friedays',
             ...variables,
             nerds: null,
             myOrders: []
