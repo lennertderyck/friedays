@@ -17,6 +17,15 @@
             transform-origin: center;
         }
     }
+    
+    .disable-transitions {
+        &, * {
+            &, &:hover, &:focus, &:focus-within, &::after, &::before {
+                transition: none;
+                transform-origin: unset;
+            }
+        }
+    }
  
     #app {
         min-width: 100vw;

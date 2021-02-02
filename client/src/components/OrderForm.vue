@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <div v-if="latestOrders && latestOrders.length != 0" class="mt-4 bg-light px-3 px-md-4 px-lg-5 py-4">
+            <div v-if="latestOrders && latestOrders.length != 0" class="mt-4 bg-light px-3 px-md-4 px-lg-5 py-4 disable-transitions">
                 <h5 class="mb-3">Recentste bestellingen</h5>
                 <ul class="list-group">
                     <button type="button" v-for="order in latestOrders.slice(0, 3)" :key="order.id" @click="selectPreviousOrder($event, order)" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
@@ -218,20 +218,9 @@
                     otherShop: restaurantOverride && restaurant || this.reOrderData && !this.reOrderData.shop && this.reOrderData.otherShop || undefined,
                     ...otherValues
                 }
+                console.log('BEFORE ORDER', result);
                 const orderStatus = await placeOrder(result);
                 this.orderFurfilled = true;
-            },
-            resetForm () {
-                this.latestOrders = null,
-                this.selectedPerson = null,
-                this.latestOrder = {},
-                this.currentOrder = null,
-                this.currentExtraUsers = [],
-                this.shops = [],
-                this.filteredShops = null,
-                this.filteredExtraUsers = [],
-                this.reOrderData = null,
-                this.orderFurfilled = false
             }
         }
     }

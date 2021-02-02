@@ -4,10 +4,10 @@
             <li class="list-group-item" v-for="order in orders" :key="order.id" @click="collapseOrder($event)">
                 <div>
                     <p class="mb-0">{{ order.order }}</p>
-                    <p class="mb-0 opacity-75 order__detail">besteld op 31 januari bij {{ order.shop || order.otherShop }} door {{ order.users[0] }}</p>                
+                    <p class="mb-0 opacity-75 order__detail">besteld op 31 januari bij {{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }} door {{ order.orderer.firstName }}</p>                
                 </div>
                 <div>
-                    <p class="mb-0 order__shop">{{ order.order || order.otherShop }}</p>
+                    <p class="mb-0 order__shop">{{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }}</p>
                 </div>
             </li>
         </ul>

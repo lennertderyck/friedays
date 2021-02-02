@@ -25,7 +25,8 @@ export const getLatestOrders = async userID => {
 }
 
 export const placeOrder = async orderData => {
-    const resp = await fetch(variables.apiBase + '/orders/new/', {
+    console.log('is ordering', JSON.stringify(orderData));
+    const resp = await fetch(variables.apiBase + '/orders', {
         method: 'POST',
         body: JSON.stringify(orderData),
         headers: {
