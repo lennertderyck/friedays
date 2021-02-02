@@ -1,13 +1,24 @@
 <template>
     <div class="p-0">
         <ul class="list-group list-group-flush list-group--history rounded">
-            <li class="list-group-item" v-for="order in orders" :key="order.id" @click="collapseOrder($event)">
+            <li class="list-group-item order" v-for="order in orders" :key="order.id" @click="collapseOrder($event)">
                 <div>
                     <p class="mb-0">{{ order.order }}</p>
-                    <p class="mb-0 opacity-75 order__detail">besteld op 31 januari bij {{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }} door {{ order.orderer.firstName }}</p>                
+                    <p class="mb-0 opacity-75 order__detail">
+                        besteld op 31 januari bij {{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }} 
+                        door {{ order.orderer.firstName }}
+                        <template v-if="order.users.length > 1">
+                            en {{ order.users.length - 1 }} andere 
+                            <template v-if="order.users.length == 2">persoon</template>
+                            <template v-else>personen</template>
+                        </template>
+                    </p>
                 </div>
                 <div>
-                    <p class="mb-0 order__shop">{{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }}</p>
+                    <p class="mb-0 order__shop text-muted">{{ order.shopDetails && order.shopDetails.fields.naam || order.otherShop }}</p>
+                    <div class="order__show-details">
+                        <router-link class="menu__item btn btn-primary" exact :to="'/history/' + order.id">Toon details</router-link>
+                    </div>
                 </div>
             </li>
         </ul>
@@ -19,9 +30,11 @@
         .list-group-item {
             display: flex;
             flex-direction: row;
+            align-items: center;
             justify-content: space-between;
             padding: 1rem 1.4rem;
             border: none;
+            overflow: hidden;
             
             &.active {
                 color: inherit;
@@ -37,7 +50,13 @@
                 .order__shop {
                     transform: translateY(100%);
                     opacity: 0;
-                    transition: opacity transform 1s ease;
+                    max-height: 0vh;
+                }
+                
+                .order__show-details {
+                    max-height: 100vh;
+                    opacity: 1;
+                    transform: translateY(0%);
                 }
             }
             
@@ -46,12 +65,24 @@
                 overflow: hidden;
                 opacity: 0;
                 transform: translateY(100%);
-                transition: opacity transform 1s ease;
+                transition: opacity .3s ease, transform .3s ease;
+            }
+            
+            .order__show-details {
+                max-height: 0vh;
+                opacity: 0;
+                transform: translateY(-100%);
+                overflow: hidden;
+                transition: opacity .3s ease, transform .3s ease;
             }
             
             .order__shop {
                 opacity: 1;
                 transform: translateY(0%);
+                max-height: 100vh;
+                overflow: hidden;
+                text-align: right;
+                transition: opacity .3s ease, transform .3s ease;
             }
         }
     }

@@ -17,7 +17,7 @@
                     </div>
                     <div class="list-group" v-else>
                         <div class="list-group-item p-0 d-flex align-items-center justify-content-between position-relative">
-                            <input type="text" name="restaurant" class="form-control list-group-item w-100 border-0" placeholder="Zoek een persoon" autocomplete="off" @keyup="filterUsersChange($event)">
+                            <input type="text" class="form-control list-group-item w-100 border-0" placeholder="Zoek een persoon" autocomplete="off" @keyup="filterUsersChange($event)">
                         </div>
                         <template v-for="nerd in filteredExtraUsers.slice(0, 4)">
                             <label class="list-group-item" v-if="selectedPerson !== nerd.id" :key="nerd.id">

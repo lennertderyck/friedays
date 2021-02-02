@@ -42,6 +42,7 @@
     
     .btn {
         width: fit-content;
+        white-space: nowrap;
     }
     
     .opacity-50 {opacity: .5;}
