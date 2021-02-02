@@ -1,12 +1,23 @@
 <template>
     <div id="app" class="d-flex flex-column align-items-center pt-5 pb-3">
-        <OrderForm msg="Welcome to Your Vue.js App"/>
+        <Menu />
         <!-- {{ this.$root.apiBase }} -->
-        <footer class="mt-5">v{{ appInfo.version }}</footer>
+        <div class="container">
+            <div class="shadow-sm rounded"> 
+                <router-view></router-view>
+            </div>
+        </div>
+        <footer class="mt-auto opacity-50">v{{ appInfo.version }} – <a :href="appInfo.homepage" target="_blank" rel="noopener noreferrer">GitHub</a></footer>
     </div>
 </template>
 
-<style lang="scss">    
+<style lang="scss">   
+    * {
+        &, &:hover, &:focus, &:focus-within, &::after, &::before {
+            transition: all .3s ease;
+        }
+    }
+ 
     #app {
         min-width: 100vw;
         min-height: 100vh;
@@ -35,11 +46,13 @@
 <script>
     import OrderForm from './components/OrderForm.vue';
     import appInfo from '../package.json';
-
+    import Menu from './components/Menu.vue';
+    
     export default {
         name: 'App',
         components: {
-            OrderForm
+            OrderForm,
+            Menu
         },
         data: () => ({
             appInfo

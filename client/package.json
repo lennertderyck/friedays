@@ -1,12 +1,13 @@
 {
   "name": "friedays-client",
   "version": "0.3.2",
-  "author": "Lennert De Ryck",
-  "description": "An app to order delicious fast food on fridays",
   "private": true,
-  "bugs": { 
-    "url" : "https://github.com/lennertderyck/frieday-api/issues",
-    "email" : "hello@lennertderyck.be?subject=Frieday api bug"
+  "description": "An app to order delicious fast food on fridays",
+  "author": "Lennert De Ryck",
+  "homepage": "https://github.com/lennertderyck/friedays",
+  "bugs": {
+    "url": "https://github.com/lennertderyck/friedays/issues",
+    "email": "hello@lennertderyck.be?subject=Frieday api bug"
   },
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -20,12 +21,14 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
     "register-service-worker": "^1.7.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-plugin-pwa": "^4.5.11",
+    "@vue/cli-plugin-router": "^4.5.11",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "cutleryjs": "^3.6.0",

@@ -1,11 +1,11 @@
 {
   "name": "frieday.api",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Lennert De Ryck",
   "description": "This api is used for the frieday.app, an app to order delicious fast food on fridays",
   "private": true,
   "bugs": { 
-    "url" : "https://github.com/lennertderyck/frieday-api/issues",
+    "url" : "https://github.com/lennertderyck/friedays/issues",
     "email" : "hello@lennertderyck.be?subject=Frieday api bug"
   },
   "scripts": {

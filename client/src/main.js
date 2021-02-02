@@ -6,9 +6,11 @@ import 'boxicons'
 import '@popperjs/core';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import bootstrap from 'bootstrap/dist/js/bootstrap';
+
 import { variables } from '../site.config'
 import { getNerds } from './utils/apiData'
 import './registerServiceWorker'
+import router from './router'
 
 dayjs.locale('nl-be');
 Vue.config.productionTip = false
@@ -23,6 +25,7 @@ new Vue({
             myOrders: []
         }
     },
+    router,
     async mounted () {
         this.nerds = await getNerds();
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
