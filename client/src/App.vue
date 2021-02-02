@@ -3,7 +3,7 @@
         <Menu />
         <!-- {{ this.$root.apiBase }} -->
         <div class="container">
-            <div class="shadow-sm rounded"> 
+            <div class="view-wrapper"> 
                 <router-view></router-view>
             </div>
         </div>
@@ -15,6 +15,7 @@
     * {
         &, &:hover, &:focus, &:focus-within, &::after, &::before {
             transition: all .3s ease;
+            transform-origin: center;
         }
     }
  
@@ -41,6 +42,19 @@
     .list-group-item-action.active {
         * { fill: white }
     }
+    
+    @media (min-width: 576px) {}
+    
+    @media (min-width: 768px) { 
+        .view-wrapper {
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            border-radius: .25rem;
+        }
+    }
+    
+    @media (min-width: 992px) {}
+    
+    @media (min-width: 1200px) {}
 </style>
 
 <script>

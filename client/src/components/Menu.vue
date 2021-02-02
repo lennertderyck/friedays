@@ -12,6 +12,10 @@
 
 <style lang="scss">
     .menu {
+        &, * {
+            transition: all 1s ease;
+        }
+        
         &--main {
             $spacing-around: 1.4rem;
             $spacing-around: 0rem;
@@ -43,6 +47,9 @@
             span {
                 font-weight: 500;
                 color: grey;
+                max-width: 0vw;
+                opacity: 0;
+                overflow: hidden;
             }
             
             &:hover {
@@ -67,10 +74,51 @@
                 
                 span {
                     color: var(--bs-blue);
+                    max-width: 100vw;
+                    opacity: 1;
+                    
+                }
+            }
+        }
+        
+        // &:hover {
+        //     .menu__item {
+        //         span {
+        //             max-width: 0vw;
+        //             opacity: 0;
+        //         }
+                
+        //         &:hover span {
+        //             max-width: 100vw; 
+        //             opacity: 1;
+        //         }
+        //     }
+        // }
+    }
+    
+    @media (min-width: 576px) {}
+    
+    @media (min-width: 768px) {
+        .menu {
+            &__item {
+                span {
+                    max-width: 100vw;
+                    opacity: 1;
+                }
+            }
+            
+            &:hover {
+                .menu__item span {
+                    max-width: 100vw;
+                    opacity: 1;
                 }
             }
         }
     }
+    
+    @media (min-width: 992px) {}
+    
+    @media (min-width: 1200px) {}
 </style>
 
 <script>
