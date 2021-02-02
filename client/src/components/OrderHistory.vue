@@ -32,6 +32,7 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
+            gap: 1.4rem;
             padding: 1rem 1.4rem;
             border: none;
             overflow: hidden;
