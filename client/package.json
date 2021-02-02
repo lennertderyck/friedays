@@ -1,6 +1,6 @@
 {
   "name": "friedays-client",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "description": "An app to order delicious fast food on fridays",
   "author": "Lennert De Ryck",
