@@ -6,7 +6,13 @@ export const getNerds = async () => {
     return data;
 }
 
-export const showLatestOrders = async userID => {
+export const getOrders = async () => {
+    const resp = await fetch(variables.apiBase + '/orders');
+    const data = await resp.json();
+    return data;
+}
+
+export const getLatestOrders = async userID => {
     const resp = await fetch(variables.apiBase + '/orders/nerds/' + userID);
     const data = await resp.json();
     return await Promise.all(data.map(async ({ shop, otherShop = null, ...otherFields }) => {

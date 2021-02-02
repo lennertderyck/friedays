@@ -139,7 +139,7 @@
 
 <script>
  /* eslint-disable */
-    import { filterShops, getShops, showLatestOrders, placeOrder, filterPersons, checkExtraUser, unCheckExtraUser } from '../utils'
+    import { filterShops, getShops, getLatestOrders, placeOrder, filterPersons, checkExtraUser, unCheckExtraUser } from '../utils'
     import dayjs from 'dayjs';
     import { getFormData } from 'cutleryjs';
     
@@ -166,7 +166,7 @@
         methods: {
             async onChange ({ target: { value: userID }}) {
                 this.selectedPerson = userID;
-                this.latestOrders = await showLatestOrders(userID);
+                this.latestOrders = await getLatestOrders(userID);
                 this.latestOrder = { ...this.latestOrders[0] }
             },
             dayjs,

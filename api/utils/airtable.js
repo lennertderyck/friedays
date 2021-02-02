@@ -1,6 +1,7 @@
 import Airtable from 'airtable';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat'
+import { getShops } from './getShops';
 
 dayjs.extend(customParseFormat)
 
@@ -17,11 +18,19 @@ export const base = Airtable.base(AIRTABLE_BASE);
 export const getUsers = async () => (await base('users').select().all()).getFields();
 export const getUserByID = async (...ids) => await base('users').find(ids);
 
-export const getOrders = async () => (await base('orders').select({
+export const getOrders = async () => {
+    const nerds = await getUsers();
+    const shops = getShops();
+    return (await base('orders').select({
         sort: [{field: "time", direction: "desc"}]
     })
     .all())
-    .getFields();
+    .getFields()
+    .map(({ users: [user], shop, ...otherValues }) => {
+        otherValues.orderer = await nerds.filter(({ id }) => id === user)
+        if (shop) otherValues.shopDetails = await shops.filter(({ recordid }) => recordid === shop)
+    })
+}
     
 export const getOrdersByID = async (...ids) => [await base('orders').find(ids)].getFields();
 
