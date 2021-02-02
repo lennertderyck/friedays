@@ -1,5 +1,5 @@
 <template>
-    <div class="menu menu--main shadow rounded rounded-3">
+    <div class="menu menu--main rounded rounded-3">
         <nav class="menu__list">
             <!-- <router-link class="menu__item" to="/"><box-icon name='dish'></box-icon></router-link> -->
             <router-link class="menu__item" exact to="/today"><box-icon name='dish'></box-icon><span>Overzicht</span></router-link>
@@ -23,6 +23,7 @@
             bottom: $spacing-around;
             left: $spacing-around; right: $spacing-around;
             background: white;
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
             z-index: 1;
         }
         
@@ -116,7 +117,20 @@
         }
     }
     
-    @media (min-width: 992px) {}
+    @media (min-width: 992px) {
+        .menu {
+            &--main {
+                position: relative;
+                margin-bottom: 3rem;
+                box-shadow: 0 0rem 1rem rgba(0, 0, 0, 0.041);
+                // box-shadow: none;
+                // background-color: #fdfdfd;
+                // border: 2px solid #f8f8f8;
+                // border: 2px solid #ecf4ff;
+                // border: 2px solid #f8fbff;
+            }
+        }
+    }
     
     @media (min-width: 1200px) {}
 </style>

@@ -1,8 +1,7 @@
 <template>
-    <div id="app" class="d-flex flex-column align-items-center pt-5 pb-3">
-        <Menu />
-        <!-- {{ this.$root.apiBase }} -->
+    <div id="app" class="d-flex flex-column align-items-center py-5">
         <div class="container">
+            <Menu />
             <div class="view-wrapper"> 
                 <router-view></router-view>
             </div>
@@ -48,6 +47,7 @@
     @media (min-width: 768px) { 
         .view-wrapper {
             box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+            // border: 2px solid #ecf4ff;
             border-radius: .25rem;
         }
     }
