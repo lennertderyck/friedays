@@ -17,7 +17,12 @@ export const base = Airtable.base(AIRTABLE_BASE);
 export const getUsers = async () => (await base('users').select().all()).getFields();
 export const getUserByID = async (...ids) => await base('users').find(ids);
 
-export const getOrders = async () => (await base('orders').select().all()).getFields();
+export const getOrders = async () => (await base('orders').select({
+        sort: [{field: "time", direction: "desc"}]
+    })
+    .all())
+    .getFields();
+    
 export const getOrdersByID = async (...ids) => [await base('orders').find(ids)].getFields();
 
 /**
@@ -35,8 +40,8 @@ export const getOrdersByDate = async (date = 'today', dateEnd = null) => {
 }
 
 export const getOrdersFromUser = async (userID) => (await base('orders').select({
-    sort: [{field: "time", direction: "desc"}]
-}).all())
+        sort: [{field: "time", direction: "desc"}]
+    }).all())
     .getFields()
     .filter(({ users }) => users.includes(userID))
 
