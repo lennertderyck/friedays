@@ -1,7 +1,7 @@
 import Airtable from 'airtable';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { getShops } from './getShops';
+// import { getShops } from './getShops';
 
 dayjs.extend(customParseFormat)
 
@@ -28,7 +28,7 @@ export const getOrders = async () => {
     .getFields()
     .map(({ users: [user], shop, ...otherValues }) => {
         otherValues.orderer = await nerds.filter(({ id }) => id === user)
-        if (shop) otherValues.shopDetails = await shops.filter(({ recordid }) => recordid === shop)
+        // if (shop) otherValues.shopDetails = await shops.filter(({ recordid }) => recordid === shop)
     })
 }
     
