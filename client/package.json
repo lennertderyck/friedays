@@ -1,7 +1,13 @@
 {
-  "name": "frieday-client",
-  "version": "0.1.0",
+  "name": "friedays-client",
+  "version": "0.3.2",
+  "author": "Lennert De Ryck",
+  "description": "An app to order delicious fast food on fridays",
   "private": true,
+  "bugs": { 
+    "url" : "https://github.com/lennertderyck/frieday-api/issues",
+    "email" : "hello@lennertderyck.be?subject=Frieday api bug"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",

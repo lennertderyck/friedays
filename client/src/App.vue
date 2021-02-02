@@ -1,7 +1,8 @@
 <template>
-    <div id="app" class="d-flex align-items-center py-5">
+    <div id="app" class="d-flex flex-column align-items-center pt-5 pb-3">
         <OrderForm msg="Welcome to Your Vue.js App"/>
         <!-- {{ this.$root.apiBase }} -->
+        <footer class="mt-5">v{{ appInfo.version }}</footer>
     </div>
 </template>
 
@@ -32,13 +33,17 @@
 </style>
 
 <script>
-    import OrderForm from './components/OrderForm.vue'
+    import OrderForm from './components/OrderForm.vue';
+    import appInfo from '../package.json';
 
     export default {
         name: 'App',
         components: {
             OrderForm
         },
+        data: () => ({
+            appInfo
+        }),
         mounted() {
             document.title = 'Friedays'
         }
