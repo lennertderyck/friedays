@@ -1,7 +1,7 @@
 <template>
     <div class="p-0">
-        <ul class="list-group list-group-flush list-group--history rounded">
-            <li class="list-group-item order" v-for="order in orders" :key="order.id" @click="collapseOrder($event)">
+        <ul class="list-group list-group-flush list-group--history rounded" v-if="data.length != 0">
+            <li class="list-group-item order" v-for="order in data" :key="order.id" @click="collapseOrder($event)">
                 <div>
                     <p class="mb-0">{{ order.order }}</p>
                     <p class="mb-0 opacity-75 order__detail">
@@ -22,6 +22,9 @@
                 </div>
             </li>
         </ul>
+        <div v-else>
+            <LoaderVue />
+        </div>
     </div>
 </template>
 
@@ -33,14 +36,21 @@
             align-items: center;
             justify-content: space-between;
             gap: 1.4rem;
+            margin-top: 0;
             padding: 1rem 1.4rem;
             border: none;
+            border-top: 1px solid #ced4da;
             overflow: hidden;
+            
+            &:first-child {
+                border-top: none;
+            }
             
             &.active {
                 color: inherit;
                 background-color: #ecf4ff;
                 border-color: #ecf4ff;
+                margin-top: 0;
                 
                 .order__detail {
                     max-height: 100vh;
@@ -58,6 +68,10 @@
                     max-height: 100vh;
                     opacity: 1;
                     transform: translateY(0%);
+                }
+                
+                & + .list-group-item {
+                    border-top-color: #ced4da00;
                 }
             }
             
@@ -91,9 +105,19 @@
 
 <script>
 import { getNerds, getOrders } from '../utils/apiData';
+import LoaderVue from './Loader.vue';
 
 export default {
     name: 'OrderHistory',
+    components: {
+        LoaderVue
+    },
+    props: {
+        data: {
+            type: Array,
+            required: true
+        },
+    },
     data: () => ({
         orders: [],
         nerds: []

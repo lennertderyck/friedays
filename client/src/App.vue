@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="d-flex flex-column align-items-center py-5">
-        <div class="container">
+        <div class="container px-0 px-lg-3">
             <Menu />
             <div class="view-wrapper"> 
                 <router-view></router-view>

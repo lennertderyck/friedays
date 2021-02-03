@@ -2,9 +2,9 @@
     <div class="menu menu--main rounded rounded-3">
         <nav class="menu__list">
             <!-- <router-link class="menu__item" to="/"><box-icon name='dish'></box-icon></router-link> -->
-            <router-link class="menu__item" exact to="/today"><box-icon name='dish'></box-icon><span>Overzicht</span></router-link>
+            <router-link class="menu__item" exact to="/today"><box-icon name='dish'></box-icon><span>Vandaag</span></router-link>
             <router-link class="menu__item" exact to="/"><box-icon name='plus-circle'></box-icon><span>Bestel</span></router-link>
-            <router-link class="menu__item" exact to="/history"><box-icon name='history'></box-icon><span>Geschiedenis</span></router-link>
+            <router-link class="menu__item" to="/history"><box-icon name='history'></box-icon><span>Geschiedenis</span></router-link>
             <router-link class="menu__item" exact to="/user"><box-icon name='user-circle'></box-icon><span>Gebruiker</span></router-link>
         </nav>
     </div>

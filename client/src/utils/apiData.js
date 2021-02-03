@@ -6,8 +6,8 @@ export const getNerds = async () => {
     return data;
 }
 
-export const getOrders = async () => {
-    const resp = await fetch(variables.apiBase + '/orders');
+export const getOrders = async (query = '') => {
+    const resp = await fetch(variables.apiBase + '/orders' + query);
     const data = await resp.json();
     return data;
 }

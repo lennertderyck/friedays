@@ -1,7 +1,7 @@
 <template>
     <div class="history py-5">
         <div class="px-3 px-md-5">  
-            <h3 class="mb-3">Bestelgeschiedenis</h3>
+            <h3 class="mb-3">Bestellingen vandaag</h3>
         </div>
         <div class="px-0 px-md-5">
             <OrderHistoryVue :data="orders"/>
@@ -14,7 +14,7 @@
     import { getOrders } from '../utils/apiData'
 
     export default {
-        name: 'History',
+        name: 'Today',
         components: {
             OrderHistoryVue
         },
@@ -22,7 +22,7 @@
             orders: [],
         }),
         async mounted() {
-            this.orders = await getOrders();
+            this.orders = await getOrders('/time/today');
         },
     }
 </script>

@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../pages/Home.vue'
+import History from '../pages/History.vue'
+import Today from '../pages/Today.vue'
+import OrderDetail from '../pages/OrderDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -13,10 +16,17 @@ const routes = [
   {
     path: '/history',
     name: 'History',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../pages/History.vue')
+    component: History
+  },
+  {
+    path: '/history/:id',
+    name: 'OrderDetail',
+    component: OrderDetail
+  },
+  {
+    path: '/today',
+    name: 'Today',
+    component: Today
   }
 ]
 
