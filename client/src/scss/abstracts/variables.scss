@@ -1,0 +1,22 @@
+:root {
+    --dark-900: #0a0a0a;
+    --dark-800: #171717;
+    
+    --primary-active: #ecf4ff;
+    --color: #212529;
+    --bg: var(--bs-white);
+    --border: #ced4da;
+    --menu-bg: var(--bs-white);
+    --menu-hover-bg: #f8fbff;
+    --input-bg: var(--bs-white);
+}
+
+body[data-bogan="true"] {
+    --color: #cbd2d8;
+    --bg: var(--dark-900);
+    --border: #3e4042;
+    --primary-active: #071425;
+    --menu-bg: var(--dark-800);
+    --menu-hover-bg: #232323;
+    --input-bg: var(--dark-800);
+}

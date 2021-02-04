@@ -4,6 +4,7 @@ import Home from '../pages/Home.vue'
 import History from '../pages/History.vue'
 import Today from '../pages/Today.vue'
 import OrderDetail from '../pages/OrderDetail.vue'
+import User from '../pages/User.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/today',
     name: 'Today',
     component: Today
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User
   }
 ]
 

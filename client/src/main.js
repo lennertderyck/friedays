@@ -11,6 +11,9 @@ import { variables } from '../site.config'
 import { getNerds } from './utils/apiData'
 import './registerServiceWorker'
 import router from './router'
+import { darkMode } from './utils'
+
+import './scss/index.scss'
 
 dayjs.locale('nl-be');
 Vue.config.productionTip = false
@@ -27,6 +30,8 @@ new Vue({
     },
     router,
     async mounted () {
+        darkMode().init();
+        
         this.nerds = await getNerds();
         const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
         tooltipTriggerList.map(function (tooltipTriggerEl) {

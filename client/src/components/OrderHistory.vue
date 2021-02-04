@@ -39,7 +39,7 @@
             margin-top: 0;
             padding: 1rem 1.4rem;
             border: none;
-            border-top: 1px solid #ced4da;
+            border-top: 1px solid var(--border);
             overflow: hidden;
             
             &:first-child {
@@ -48,8 +48,8 @@
             
             &.active {
                 color: inherit;
-                background-color: #ecf4ff;
-                border-color: #ecf4ff;
+                background-color: var(--primary-active);
+                border-color: var(--primary-active);
                 margin-top: 0;
                 
                 .order__detail {

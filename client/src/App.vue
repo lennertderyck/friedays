@@ -1,5 +1,5 @@
 <template>
-    <div id="app" class="d-flex flex-column align-items-center py-5">
+    <div id="app" class="d-flex flex-column align-items-center py-3 py-md-4 py-lg-5">
         <div class="container px-0 px-lg-3">
             <Menu />
             <div class="view-wrapper"> 

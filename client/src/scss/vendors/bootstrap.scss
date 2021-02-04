@@ -1,0 +1,35 @@
+.list-group { 
+    .list-group-item {
+        background: none;
+        
+        &.list-group-item-action {
+            background: inherit;
+            border-color: var(--border);
+            color: var(--color);
+            
+            &.active {
+                background-color: var(--bs-primary);
+                border-color: var(--bs-primary);
+                color: var(--bs-white);
+            }
+        }
+    }
+}
+
+.form-select, .form-control {
+    background-color: var(--input-bg);
+    border-color: var(--border);
+    color: var(--color);
+}
+
+.form-select {
+    option:disabled {
+        color: red;
+    }
+}
+
+[data-bogan="true"] {
+    .bg-light {
+        background-color: var(--dark-800) !important;
+    }
+}

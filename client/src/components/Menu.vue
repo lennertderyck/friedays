@@ -22,7 +22,7 @@
             position: fixed;
             bottom: $spacing-around;
             left: $spacing-around; right: $spacing-around;
-            background: white;
+            background-color: var(--menu-bg);
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
             z-index: 1;
         }
@@ -54,7 +54,7 @@
             }
             
             &:hover {
-                background-color: #f8fbff;
+                background-color: var(--menu-hover-bg);
                 color: unset;
                 
                 box-icon {
@@ -67,7 +67,7 @@
             }
             
             &.router-link-active {
-                background-color: #ecf4ff;
+                background-color: var(--primary-active);
                 
                 box-icon {
                     fill: var(--bs-blue);
